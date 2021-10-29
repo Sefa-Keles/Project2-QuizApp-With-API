@@ -58,8 +58,7 @@ xhr.open("GET", 'https://opentdb.com/api.php?amount=10&category=18&difficulty=ea
 xhr.onload = function() {
     if(this.status === 200);
     let questionData = JSON.parse(this.responseText);
-
-
+    
     //Function that shuffles the order of options from url
     let shuffle = (questionOptions) => {
         let currentIndex = questionOptions.length,  randomIndex;
