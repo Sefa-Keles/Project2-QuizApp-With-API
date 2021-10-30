@@ -49,35 +49,42 @@ Quiz.prototype.guess = function (selectedElement){
     }
 }
 
-$(".nav-link").css("color", "#fe5a1d");
-$(".anchor").css("color", "grey");
-let anchors = document.querySelectorAll(".anchor");
-let anchorsArray = Array.from(anchors);
+$(".nav-item, .dropdown-item").css("font-weight", "bold");
+$(".nav-link, .dropdown-item").css("color", "#FF5733");
+$(".anchor").css("color", "#900C3F");
 let url = "";
 let levels = "";
 let dropdowns = document.querySelectorAll(".dropdown-item");
 let dropdownList = document.querySelector(".select-level");
+let anchors = document.querySelectorAll(".anchor");
+let anchorsArray = Array.from(anchors);
 //console.log(dropdownList);
 
-anchorsArray.forEach(items => items.disabled =true);
+//1 anchorsArray.forEach(items => items.disabled =true);
+anchorsArray.forEach(element => {
+    element.style.display="none";
+});
 
 dropdowns.forEach(items => {
     items.addEventListener("click", function(){
         levels = items.id;   
-        $(".select-level").css("color", "grey");
-        anchors.disabled = true;
-        $(".anchor").css("color", "#fe5a1d");
+        //2 $(".select-level").css("color", "grey");
+        //3 anchorsArray.forEach(items => items.disabled = false);
+        //4 $(".anchor").css("color", "#fe5a1d");
+        $(".select-level").text(`Level: ${levels.toUpperCase()}`);
+        anchorsArray.forEach(element => {
+            element.style.display="block";
+        });
         //console.log(dropdownList)
         //console.log(levels);
-        $(".select-level").text(`Level: ${levels.toUpperCase()}`);
         anchorsArray.forEach(element => { 
-            //element.style.display = "block";
             element.addEventListener("click", function(){
-                dropdownList.disabled=true;  
-                element.disabled=false;
-                $(".select-level").css("color", "grey");
-                $(".anchor").css("color", "#fe5a1d");
-                let quizTitle = element.text; 
+                dropdownList.disabled = true;  
+                //element.disabled=false;
+                //9 $(".select-level").css("color", "grey");
+                //8 $(".anchor").css("color", "#fe5a1d");
+                let quizText = element.text; 
+                let quizTitle =`${quizText} - ${levels.toUpperCase()}`
                 $(".quiz-title").text(quizTitle);//Card header changes dynamically
                 let anchorId = element.id;
                 //console.log(levels);
@@ -177,14 +184,20 @@ dropdowns.forEach(items => {
                 for(let i in pagingButtons){
                     pagingButtons[i].style.display = "none";
                 };
-                let html  = `<h3>Total Score: ${quiz.score}</h3>`;
+                let html = `<h3>Total Score: ${quiz.score}</h3>`;
                 document.querySelector("#question").innerHTML = html;
                 document.getElementById("buttons").style.visibility = "hidden";
                 let btnAgain = document.getElementById("btnAgain");
                 btnAgain.style.display = "block";
-                dropdownList.disabled = false;
-                $(".select-level").css("color", "#fe5a1d");
+                anchorsArray.forEach(element => {
+                    element.style.display="none";
+                });
+                dropdownList.disabled=false;
+                //6 dropdownList.disabled = false;
+                //7 $(".select-level").css("color", "#fe5a1d");
+                //anchors.disabled = true;
                 //anchorsArray.forEach(items => items.disabled =true);
+                //console.log(anchorsArray);
                 //$(".anchor").css("color", "grey");
                 btnAgain.onclick = () => {
                     quiz.score = 0;
