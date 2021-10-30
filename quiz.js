@@ -45,131 +45,183 @@ Quiz.prototype.isFinish = function(){
 Quiz.prototype.guess = function (selectedElement){ 
     let myQuestion = this.getQuestion();
     if(myQuestion.checkAnswer(selectedElement)){
-        this.score+=10;
+        this.score++;
     }
 }
 
+$(".nav-link").css("color", "#fe5a1d");
+$(".anchor").css("color", "grey");
+let anchors = document.querySelectorAll(".anchor");
+let anchorsArray = Array.from(anchors);
+let url = "";
+let levels = "";
+let dropdowns = document.querySelectorAll(".dropdown-item");
+let dropdownList = document.querySelector(".select-level");
+//console.log(dropdownList);
 
-const xhr = new XMLHttpRequest();
-//Function that makes API request from url
-xhr.open("GET", 'https://opentdb.com/api.php?amount=10&category=18&difficulty=easy&type=multiple', true);
+anchorsArray.forEach(items => items.disabled =true);
 
-//The function that works as soon as the api is loaded from the url
-xhr.onload = function() {
-    if(this.status === 200);
-    let questionData = JSON.parse(this.responseText);
-    
-    //Function that shuffles the order of options from url
-    let shuffle = (questionOptions) => {
-        let currentIndex = questionOptions.length,  randomIndex;
-          while (currentIndex != 0) {
-            randomIndex = Math.floor(Math.random() * currentIndex);
-            currentIndex--;
-            [questionOptions[currentIndex], questionOptions[randomIndex]] = [questionOptions[randomIndex], questionOptions[currentIndex]];
-        }  
-        return questionOptions;
-    }
-
-    // Loop used to manipulate the API according to the algorithm
-    let questions = [];
-    for(let i in questionData.results){
-        let questionOptions = [...questionData.results[i].incorrect_answers, questionData.results[i].correct_answer];// The options in the URL were collected in one line according to my own algorithm.
-        let shuffleOptions = shuffle(questionOptions); // Shuffle option items
-        let questionItem = questionData.results;
-        questionItem[i].allOptions = shuffleOptions;// Added a new object key to the API (allOptions)
-        questions.push(new Question(questionItem[i])); // New Question Created
-    }
-
-    let quiz = new Quiz(questions);
-
-    //Function to associate object with HTML
-    let loadQuestion = () =>{
-        let nextButton = document.getElementById("btnNext");
-        let previousButton = document.getElementById("btnPrevious");
-        document.getElementById("btnAgain").style.display= "none";
-        document.querySelector("#buttons").style.display = "block";
-        if(quiz.isFinish()){
-            showScore(previousButton, nextButton);
-        }else{  
-            let quizQuestion = quiz.getQuestion();
-            let quizOptions = quizQuestion.allOptions;
-            document.querySelector("#question").innerText = quizQuestion.question;
-            for(let i in quizOptions){
-                let optionElement = document.querySelector("#option"+i);
-                let parentElements = optionElement.parentElement;
-                optionElement.innerText = quizOptions[i]; 
-                getSelection("btn"+i, optionElement); 
-                pagingQuestion(previousButton, nextButton, parentElements);           
+dropdowns.forEach(items => {
+    items.addEventListener("click", function(){
+        levels = items.id;   
+        $(".select-level").css("color", "grey");
+        anchors.disabled = true;
+        $(".anchor").css("color", "#fe5a1d");
+        //console.log(dropdownList)
+        //console.log(levels);
+        $(".select-level").text(`Level: ${levels.toUpperCase()}`);
+        anchorsArray.forEach(element => { 
+            //element.style.display = "block";
+            element.addEventListener("click", function(){
+                dropdownList.disabled=true;  
+                element.disabled=false;
+                $(".select-level").css("color", "grey");
+                $(".anchor").css("color", "#fe5a1d");
+                let quizTitle = element.text; 
+                $(".quiz-title").text(quizTitle);//Card header changes dynamically
+                let anchorId = element.id;
+                //console.log(levels);
+                url = `https://opentdb.com/api.php?amount=10&${anchorId}&difficulty=${levels}&type=multiple`;
+                //console.log(url);
+                const xhr = new XMLHttpRequest();
+        
+        //Function that makes API request from url (Asynchronous)
+        xhr.open("GET", url, true);
+        
+        //The function that works as soon as the api is loaded from the url
+        xhr.onload = function() {
+            if(this.status === 200);
+            let questionData = JSON.parse(this.responseText);
+        
+            //Function that shuffles the order of options from url
+            let shuffle = (questionOptions) => {
+                let currentIndex = questionOptions.length,  randomIndex;
+                  while (currentIndex != 0) {
+                    randomIndex = Math.floor(Math.random() * currentIndex);
+                    currentIndex--;
+                    [questionOptions[currentIndex], questionOptions[randomIndex]] = [questionOptions[randomIndex], questionOptions[currentIndex]];
+                }  
+                return questionOptions;
             }
-            showProgress();
-        }  
-    }
-    
-    //where buttons are captured and the clicked button is sent to
-    let getSelection = (...selectionElements) => {
-        let button = document.getElementById(selectionElements[0]);
-        button.onclick = function(){ 
-            quiz.guess(selectionElements[1]);
-        };
-    };
-    
-    //Function that handles events when the forward and back buttons are clicked
-    let pagingQuestion = (...pagingElements) => {
-        document.getElementById("questionInfo").innerHTML ="";
-        pagingElements[2].setAttribute("class", "btn btn-primary");
-        pagingElements[2].removeAttribute("disabled");
-        if(quiz.questionIndex !== 0){
-            pagingElements[0].style.display = "block";
-            pagingElements[0].disabled = false;
-            pagingElements[0].onclick = () => {
-                quiz.questionIndex--;
-                loadQuestion();
+        
+            // Loop used to manipulate the API according to the algorithm
+            let questions = [];
+            for(let i in questionData.results){
+                let questionOptions = [...questionData.results[i].incorrect_answers, questionData.results[i].correct_answer];// The options in the URL were collected in one line according to my own algorithm.
+                let shuffleOptions = shuffle(questionOptions); // Shuffle option items
+                let questionItem = questionData.results;
+                questionItem[i].allOptions = shuffleOptions;// Added a new object key to the API (allOptions)
+                questions.push(new Question(questionItem[i])); // New Question Created
             }
-        } else{
-            pagingElements[0].style.display = "block";
-            pagingElements[0].disabled = true;
-            pagingElements[1].style.display ="block";
-            pagingElements[1].onclick = () => {
-                quiz.questionIndex++;
-                loadQuestion();
+        
+            let quiz = new Quiz(questions);
+        
+            //Function to associate object with HTML
+            let loadQuestion = () =>{
+                let nextButton = document.getElementById("btnNext");
+                let previousButton = document.getElementById("btnPrevious");
+                document.getElementById("btnAgain").style.display= "none";
+                document.getElementById("buttons").style.visibility = "visible";
+                if(quiz.isFinish()){
+                    showScore(previousButton, nextButton);
+                }else{  
+                    let quizQuestion = quiz.getQuestion();
+                    let quizOptions = quizQuestion.allOptions;
+                    document.querySelector("#question").innerText = quizQuestion.question;
+                    for(let i in quizOptions){
+                        let optionElement = document.querySelector("#option"+i);
+                        let parentElements = optionElement.parentElement;
+                        optionElement.innerText = quizOptions[i]; 
+                        getSelection("btn"+i, optionElement); 
+                        pagingQuestion(previousButton, nextButton, parentElements);           
+                    }
+                    showProgress();
+                }  
+            }
+            
+            //where buttons are captured and the clicked button is sent to
+            let getSelection = (...selectionElements) => {
+                let button = document.getElementById(selectionElements[0]);
+                button.onclick = function(){ 
+                    quiz.guess(selectionElements[1]);
+                };
             };
-        }
-    
-    }
-    
-    //Function that calculates the total score at the end of the quiz and reloads the quiz
-    let showScore = (...pagingButtons) => {
-        for(let i in pagingButtons){
-            pagingButtons[i].style.display = "none";
-        };
-        document.querySelector("#buttons").style.display = "none";
-        let html  = `<h3>Total Score: ${quiz.score}</h3>`;
-        document.querySelector("#question").innerHTML = html;
-        document.getElementById("questionInfo").innerHTML = "";
-        let btnAgain = document.getElementById("btnAgain");
-        btnAgain.style.display = "block";
-        btnAgain.onclick = () => {
-            quiz.score = 0;
-            btnAgain.style.display = "none";
-            quiz.questionIndex = 0;
-            questions = questions.sort(()=> Math.random()-0.5);
+            
+            //Function that handles events when the forward and back buttons are clicked
+            let pagingQuestion = (...pagingElements) => {
+            
+                //for dongusu kullanilarak bu kod blogunu daha kisa yazabilirim.
+                pagingElements[2].setAttribute("class", "btn btn-outline-primary");
+                pagingElements[2].removeAttribute("disabled");
+                if(quiz.questionIndex !== 0){
+                    pagingElements[0].style.display = "block";
+                    pagingElements[0].disabled = false;
+                    pagingElements[0].onclick = () => {
+                        quiz.questionIndex--;
+                        loadQuestion();
+                    }
+                } else{
+                    pagingElements[0].style.display = "block";
+                    pagingElements[0].disabled = true;
+                    pagingElements[1].style.display ="block";
+                    pagingElements[1].onclick = () => {
+                        quiz.questionIndex++;
+                        loadQuestion();
+                    };
+                }
+            
+            }
+            
+            //Function that calculates the total score at the end of the quiz and reloads the quiz
+            let showScore = (...pagingButtons) => {
+                for(let i in pagingButtons){
+                    pagingButtons[i].style.display = "none";
+                };
+                let html  = `<h3>Total Score: ${quiz.score}</h3>`;
+                document.querySelector("#question").innerHTML = html;
+                document.getElementById("buttons").style.visibility = "hidden";
+                let btnAgain = document.getElementById("btnAgain");
+                btnAgain.style.display = "block";
+                dropdownList.disabled = false;
+                $(".select-level").css("color", "#fe5a1d");
+                //anchorsArray.forEach(items => items.disabled =true);
+                //$(".anchor").css("color", "grey");
+                btnAgain.onclick = () => {
+                    quiz.score = 0;
+                    btnAgain.style.display = "none";
+                    dropdownList.disabled = true;
+                    $(".select-level").css("color", "grey");
+                    quiz.questionIndex = 0;
+                    questions = questions.sort(()=> Math.random()-0.5);
+                    loadQuestion();
+                };
+            };
+            
+            //Question Navigation
+            let showProgress = () => {
+                let total = quiz.questions.length;
+                let questionNumber = quiz.questionIndex+1;
+                document.querySelector("#progress").innerText =  "Question "+ questionNumber + " of " + total;
+            };
+            
             loadQuestion();
-        };
-    };
-    
-    //Question Navigation
-    let showProgress = () => {
-        let total = quiz.questions.length;
-        let questionNumber = quiz.questionIndex+1;
-        document.querySelector("#progress").innerText =  "Question "+ questionNumber + " of " + total;
-    };
-    
-    loadQuestion();
-    
-}
+            
+        }
+        
+        //The function where the API request is sent
+        xhr.send();
+                
+            })
+        });
+                
+    });
+});
 
-//The function where the API request is sent
-xhr.send();
+
+
+//Function to be triggered when navigating the navigation buttons
+
+
 
 
 
