@@ -3,12 +3,8 @@
 class Question {
     constructor(newQuestion){
         this.allOptions = newQuestion.allOptions;
-        //this.category = category;
         this.correct_answer = newQuestion.correct_answer;
-        //this.difficulty = difficulty;
-        //this.incorrect_answers = incorrect_answers;
         this.question = newQuestion.question;
-        //this.type = type;
     }
 }
 
@@ -58,49 +54,43 @@ let dropdowns = document.querySelectorAll(".dropdown-item");
 let dropdownList = document.querySelector(".select-level");
 let anchors = document.querySelectorAll(".anchor");
 let anchorsArray = Array.from(anchors);
-//console.log(dropdownList);
 
-//1 anchorsArray.forEach(items => items.disabled =true);
-anchorsArray.forEach(element => {
-    element.style.display="none";
-});
+let displayCategories = (text) =>{   
+    anchorsArray.forEach(element => {
+        element.style.display = text;
+    });
+}
+displayCategories("none");// Hide categories
 
+//Events when the level button is clicked
 dropdowns.forEach(items => {
     items.addEventListener("click", function(){
-        levels = items.id;   
-        //2 $(".select-level").css("color", "grey");
-        //3 anchorsArray.forEach(items => items.disabled = false);
-        //4 $(".anchor").css("color", "#fe5a1d");
+        levels = items.id;
         $(".select-level").text(`Level: ${levels.toUpperCase()}`);
-        anchorsArray.forEach(element => {
-            element.style.display="block";
-        });
-        //console.log(dropdownList)
-        //console.log(levels);
+        displayCategories("block");// Show categories
+
+        //Events when categories are clicked
         anchorsArray.forEach(element => { 
             element.addEventListener("click", function(){
-                dropdownList.disabled = true;  
-                //element.disabled=false;
-                //9 $(".select-level").css("color", "grey");
-                //8 $(".anchor").css("color", "#fe5a1d");
+                dropdownList.disabled = true;
+                dropdownList.style.color = "grey";
                 let quizText = element.text; 
-                let quizTitle =`${quizText} - ${levels.toUpperCase()}`
+                let quizTitle =`${quizText} - ${levels.toUpperCase()}` //Quiz info in card
                 $(".quiz-title").text(quizTitle);//Card header changes dynamically
                 let anchorId = element.id;
-                //console.log(levels);
-                url = `https://opentdb.com/api.php?amount=10&${anchorId}&difficulty=${levels}&type=multiple`;
-                //console.log(url);
+                url = `https://opentdb.com/api.php?amount=10&${anchorId}&difficulty=${levels}&type=multiple`; //API pulled by category
+
                 const xhr = new XMLHttpRequest();
         
-        //Function that makes API request from url (Asynchronous)
-        xhr.open("GET", url, true);
+            //Function that makes API request from url (Asynchronous)
+            xhr.open("GET", url, true);
         
-        //The function that works as soon as the api is loaded from the url
-        xhr.onload = function() {
+            //The function that works as soon as the api is loaded from the url
+            xhr.onload = function() {
             if(this.status === 200);
-            let questionData = JSON.parse(this.responseText);
+            let questionData = JSON.parse(this.responseText); //Converting JSON data to string
         
-            //Function that shuffles the order of options from url
+            //Function that shuffles the order of options from url data
             let shuffle = (questionOptions) => {
                 let currentIndex = questionOptions.length,  randomIndex;
                   while (currentIndex != 0) {
@@ -121,6 +111,7 @@ dropdowns.forEach(items => {
                 questions.push(new Question(questionItem[i])); // New Question Created
             }
         
+            //Creating new object
             let quiz = new Quiz(questions);
         
             //Function to associate object with HTML
@@ -156,8 +147,6 @@ dropdowns.forEach(items => {
             
             //Function that handles events when the forward and back buttons are clicked
             let pagingQuestion = (...pagingElements) => {
-            
-                //for dongusu kullanilarak bu kod blogunu daha kisa yazabilirim.
                 pagingElements[2].setAttribute("class", "btn btn-outline-primary");
                 pagingElements[2].removeAttribute("disabled");
                 if(quiz.questionIndex !== 0){
@@ -176,7 +165,6 @@ dropdowns.forEach(items => {
                         loadQuestion();
                     };
                 }
-            
             }
             
             //Function that calculates the total score at the end of the quiz and reloads the quiz
@@ -184,33 +172,28 @@ dropdowns.forEach(items => {
                 for(let i in pagingButtons){
                     pagingButtons[i].style.display = "none";
                 };
+                $(".select-level").text("SELECT LEVEL");
                 let html = `<h3>Total Score: ${quiz.score}</h3>`;
                 document.querySelector("#question").innerHTML = html;
                 document.getElementById("buttons").style.visibility = "hidden";
                 let btnAgain = document.getElementById("btnAgain");
                 btnAgain.style.display = "block";
-                anchorsArray.forEach(element => {
-                    element.style.display="none";
-                });
+                displayCategories("none"); //Hide categories
                 dropdownList.disabled=false;
-                //6 dropdownList.disabled = false;
-                //7 $(".select-level").css("color", "#fe5a1d");
-                //anchors.disabled = true;
-                //anchorsArray.forEach(items => items.disabled =true);
-                //console.log(anchorsArray);
-                //$(".anchor").css("color", "grey");
+                dropdownList.style.color = "#FF5733";
+                //Click event of the Start Again button
                 btnAgain.onclick = () => {
                     quiz.score = 0;
                     btnAgain.style.display = "none";
                     dropdownList.disabled = true;
                     $(".select-level").css("color", "grey");
                     quiz.questionIndex = 0;
-                    questions = questions.sort(()=> Math.random()-0.5);
+                    questions = questions.sort(()=> Math.random()-0.5); //Changing the place of the test questions in case the quiz is repeated
                     loadQuestion();
                 };
             };
             
-            //Question Navigation
+            //Question navigation information
             let showProgress = () => {
                 let total = quiz.questions.length;
                 let questionNumber = quiz.questionIndex+1;
@@ -218,21 +201,14 @@ dropdowns.forEach(items => {
             };
             
             loadQuestion();
-            
+    
         }
-        
-        //The function where the API request is sent
-        xhr.send();
-                
+            //The function where the API request is sent
+            xhr.send(); 
             })
-        });
-                
+        });               
     });
 });
-
-
-
-//Function to be triggered when navigating the navigation buttons
 
 
 
