@@ -19,3 +19,6 @@
     height: auto;            /* Footer height */
   }
 
+  .footer-container{
+    background-color: #FF5733;
+  }
