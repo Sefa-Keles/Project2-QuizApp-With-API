@@ -11,16 +11,22 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <!--External CSS File-->
+    <link rel="stylesheet" href="style.css">
+    <!--Google Font Family-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap" rel="stylesheet">
 </head>
 
 <!--NAVITATION BAR-->
 <div class="container my-3">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item">
-            <a class="nav-link active" id="howto-tab" data-toggle="tab" href="#howto" role="tab"
+        <li class="nav-item col-6">
+            <a class="nav-link active" id="howtoTab" data-toggle="tab" href="#howto" role="tab"
                 aria-controls="quizPage" aria-selected="true">How To</a>
         </li>
-        <li id="dropdownList" class="nav-item dropdown">
+        <li id="dropdownList" class="nav-item dropdown col-6">
             <a class="nav-link dropdown-toggle select-level" href="#" id="navbarDropdown" role="button"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">SELECT LEVEL</a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -29,27 +35,27 @@
                 <a id="hard" class="dropdown-item" href="#">Hard</a>
             </div>
         </li>
-        <li class="nav-item">
+        <li class="nav-item col-sm-6 col-md-4 col-lg-2">
             <a class="nav-link anchor" id="category=18" data-toggle="tab" href="#quizPage" role="tab"
                 aria-controls="quizPage" aria-selected="true">Computer Science</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item col-sm-6 col-md-4 col-lg-2">
             <a class="nav-link anchor" id="category=17" data-toggle="tab" href="#quizPage" role="tab"
                 aria-controls="quizPage" aria-selected="true">Science & Nature</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item col-sm-6 col-md-4 col-lg-2">
             <a class="nav-link anchor" id="category=12" data-toggle="tab" href="#quizPage" role="tab"
                 aria-controls="quizPage" aria-selected="true">Music</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item col-sm-6 col-md-4 col-lg-2">
             <a class="nav-link anchor" id="category=11" data-toggle="tab" href="#quizPage" role="tab"
                 aria-controls="quizPage" aria-selected="true">Film</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item col-sm-6 col-md-4 col-lg-2">
             <a class="nav-link anchor" id="category=10" data-toggle="tab" href="#quizPage" role="tab"
                 aria-controls="quizPage" aria-selected="true">Book</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item col-sm-6 col-md-4 col-lg-2">
             <a class="nav-link anchor" id="category=21" data-toggle="tab" href="#quizPage" role="tab"
                 aria-controls="quizPage" aria-selected="true">Sports</a>
         </li>
@@ -57,111 +63,126 @@
 </div>
 
 <body>
-    <div class="tab-content" id="myTabContent">
-        <!--HOW TO PAGE-->
-        <div class="tab-pane fade show active" id="howto" role="tabpanel" aria-labelledby="home-tab">
-            <div class="container mt-4">
-                <div class="jumbotron jumbotron-fluid">
-                    <div class="container">
-                        <h1 class="display-4">Try Yourself <br> Test Your Knowledge</h1>
-                        <p class="lead">You can have the chance to evaluate your knowledge in a short quiz from computer
-                            science, science and nature, music, movies, books and sports.
-                        </p>
+    <div class="page-container">
+        <div class="wrapper">
+            <div class="tab-content" id="myTabContent">
+                <!--HOW TO PAGE-->
+                <div class="tab-pane fade show active" id="howto" role="tabpanel" aria-labelledby="home-tab">
+                    <div class="container mt-4">
+                        <div class="jumbotron jumbotron-fluid">
+                            <div class="container">
+                                <h1 class="display-4">Try Yourself <br> Test Your Knowledge</h1>
+                                <p class="lead">You can have the chance to evaluate your knowledge in a short quiz from
+                                    computer
+                                    science, science and nature, music, movies, books and sports.
+                                </p>
+                            </div>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <span class="badge badge-warning badge-pill">Step 1</span>
+                                Please select a level from the navigation bar.
+                            </li>
+                            <li class="list-group-item">
+                                <span class="badge badge-warning badge-pill">Step 2</span>
+                                Please select a category from the navigation bar.
+                            </li>
+                            <li class="list-group-item">
+                                <span class="badge badge-warning badge-pill">Step 3</span>
+                                Click on the option you guessed.
+                            </li>
+                            <li class="list-group-item">
+                                <span class="badge badge-warning badge-pill">Step 4</span>
+                                Click next to go to the next question.
+                            </li>
+                            <li class="list-group-item">
+                                <span class="badge badge-warning badge-pill">Step 5</span>
+                                Click the Previous button to return to the previous questions.
+                            </li>
+                            <li class="list-group-item">
+                                <span class="badge badge-warning badge-pill">Step 6</span>
+                                If you want to repeat the same quiz at the end of the quiz, click the Start Again
+                                button.
+                            </li>
+                            <li class="list-group-item">
+                                <span class="badge badge-warning badge-pill">Step 7</span>
+                                You can choose again from the navigation bar to be a new quiz.
+                            </li>
+                            <li class="list-group-item">
+                                <span class="badge badge-info badge-pill">Note</span>
+                                Each category consists of 10 questions.
+                            </li>
+                            <li class="list-group-item">
+                                <span class="badge badge-info badge-pill">Note</span>
+                                If you select a level and then a quiz category, you can switch to quizzes from other
+                                categories
+                                without selecting a level again. However, you cannot switch to other difficulty levels
+                                before
+                                your quiz is over.
+                            </li>
+                        </ul>
                     </div>
                 </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                        <span class="badge badge-warning badge-pill">Step 1</span>
-                        Please select a level from the navigation bar.
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge badge-warning badge-pill">Step 2</span>
-                        Please select a category from the navigation bar.
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge badge-warning badge-pill">Step 3</span>
-                        Click on the option you guessed.
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge badge-warning badge-pill">Step 4</span>
-                        Click next to go to the next question.
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge badge-warning badge-pill">Step 5</span>
-                        Click the Previous button to return to the previous questions.
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge badge-warning badge-pill">Step 6</span>
-                        If you want to repeat the same quiz at the end of the quiz, click the Start Again button.
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge badge-warning badge-pill">Step 7</span>
-                        You can choose again from the navigation bar to be a new quiz.
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge badge-info badge-pill">Note</span>
-                        Each category consists of 10 questions.
-                    </li>
-                </ul>
-            </div>
-        </div>
 
-        <!--QUIZ PAGES for Categories-->
-        <div class="tab-pane fade" id="quizPage" role="tabpanel" aria-labelledby="profile-tab">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <h5 class="card-header quiz-title">QUIZ</h5>
-                            <div class="card-body">
-                                <h5 id="question">
-                                    <div class="card-header">
-                                        Question Text
+                <!--QUIZ PAGES for Categories-->
+                <div class="tab-pane fade" id="quizPage" role="tabpanel" aria-labelledby="profile-tab">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <h5 class="card-header quiz-title">QUIZ</h5>
+                                    <div class="card-body">
+                                        <h5 id="question">
+                                            <div class="card-header">
+                                                Question Text
+                                            </div>
+                                        </h5>
+                                        <hr>
+                                        <div id="buttons" class="d-flex flex-column">
+                                            <button type="button" id="btn0" class="btn btn-outline-primary">
+                                                <span id="option0">
+                                                    Option 0
+                                                </span>
+                                            </button><br>
+                                            <button type="button" id="btn1" class="btn btn-outline-primary">
+                                                <span id="option1">
+                                                    Option 1
+                                                </span>
+                                            </button><br>
+                                            <button type="button" id="btn2" class="btn btn-outline-primary">
+                                                <span id="option2">
+                                                    Option 2
+                                                </span>
+                                            </button><br>
+                                            <button type="button" id="btn3" class="btn btn-outline-primary">
+                                                <span id="option3">
+                                                    Option 3
+                                                </span>
+                                            </button>
+                                        </div>
+                                        <!-- <div id="questionInfo"></div> -->
                                     </div>
-                                </h5>
-                                <hr>
-                                <div id="buttons" class="d-flex flex-column">
-                                    <button type="button" id="btn0" class="btn btn-outline-primary">
-                                        <span id="option0">
-                                            Option 0
-                                        </span>
-                                    </button><br>
-                                    <button type="button" id="btn1" class="btn btn-outline-primary">
-                                        <span id="option1">
-                                            Option 1
-                                        </span>
-                                    </button><br>
-                                    <button type="button" id="btn2" class="btn btn-outline-primary">
-                                        <span id="option2">
-                                            Option 2
-                                        </span>
-                                    </button><br>
-                                    <button type="button" id="btn3" class="btn btn-outline-primary">
-                                        <span id="option3">
-                                            Option 3
-                                        </span>
-                                    </button>
-                                </div>
-                                <!-- <div id="questionInfo"></div> -->
-                            </div>
-                            <div class="card-footer">
-                                <div class="container">
-                                    <div class="row">
-                                        <div id="progress" class="col-sm-8"></div>
-                                        <div class="btn-group" role="group" aria-label="pagination buttons">
-                                            <button type="button" id="btnPrevious" class="btn btn-outline-info">
-                                                <span>
-                                                    Previous
-                                                </span>
-                                            </button>
-                                            <button type="button" id="btnNext" class="btn btn-outline-info">
-                                                <span>
-                                                    Next
-                                                </span>
-                                            </button>
-                                            <button id='btnAgain' class='btn btn-secondary'>
-                                                Start Again
-                                            </button>
+                                    <div class="card-footer">
+                                        <div class="container">
+                                            <div class="row pagination-row">
+                                                <div id="progress" class="col-7"></div>
+                                                <div class="col-5 btn-group pagination-buttons" role="group"
+                                                    aria-label="pagination buttons">
+                                                    <button type="button" id="btnPrevious" class="btn btn-outline-info">
+                                                        <span>
+                                                            Previous
+                                                        </span>
+                                                    </button>
+                                                    <button type="button" id="btnNext" class="btn btn-outline-info">
+                                                        <span>
+                                                            Next
+                                                        </span>
+                                                    </button>
+                                                    <button id='btnAgain' class='btn btn-secondary'>
+                                                        Start Again
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -170,6 +191,14 @@
                     </div>
                 </div>
             </div>
+            <!--FOOTER SECTION-->
+            <footer id="footer">
+                <div class="container footer-container">
+                    <p class="p-3 mb-2 bg-danger text-white text-center">
+                        © 2021 - Developed by Sefa Keles.
+                    </p>
+                </div>
+            </footer>
         </div>
     </div>
     <script src="quiz.js"></script>

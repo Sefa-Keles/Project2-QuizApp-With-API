@@ -5,12 +5,17 @@ The Quiz app presented in this repository is built using the technologies taught
 ***  
 
 ## Features  
-* => A navigation bar built using Bootstrap       
-* => 3 levels of difficulty
+* => Informative "How To" page
+* => A navigation bar built using Bootstrap   
+* => Custom font view with Google font family
+* => Responsive design for devices    
+* => 3 levels of difficulty and level indicator
 * => Question cards with Bootstrap grid structure  
+* => Indicator structure showing which question you are in
 * => Questions come dynamically from an API 
 * => Changing the order of questions and options by restarting the test
 * => Pagination navigation for easy switching between questions
+* => Refresh button that allows you to repeat the test
 * => A scoreboard showing your total score
 ***
 
@@ -92,6 +97,11 @@ The Quiz app presented in this repository is built using the technologies taught
 * When the start again button is clicked, do the options of the questions are changed?
 
 * When the start again button is clicked, is the level set to the default value?
+
+
+
+3. **FOOTER**  
+* Is the footer view positioned at the bottom of the page according to the screen used?
 ***
 
 ## Deployment
@@ -107,6 +117,7 @@ This website design was produced with the Visual Studio Code IDE. Git was used a
 * Cards [https://getbootstrap.com/docs/4.0/components/card/](https://getbootstrap.com/docs/4.0/components/card/)
 * API - Open Trivia DB [https://opentdb.com/api_config.php](https://opentdb.com/api_config.php)
 * Stack Overflow [https://stackoverflow.com/](https://stackoverflow.com/)
+* Free Code Camp [https://www.freecodecamp.org/](https://www.freecodecamp.org/)
+* W3 Schools [https://www.w3schools.com/](https://www.w3schools.com/)
 * jQuery [https://jquery.com/](https://jquery.com/)
-
 ***

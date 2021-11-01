@@ -1,0 +1,21 @@
+*{
+    /*Google Font CSS*/
+    font-family: 'Open Sans', sans-serif;
+}
+
+.page-container {
+    position: relative;
+    min-height: 100vh;      /*Viewport height*/
+  }
+  
+  .wrapper {
+    padding-bottom: 2.5rem;    /* Footer height */
+  }
+
+  #footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: auto;            /* Footer height */
+  }
+
