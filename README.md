@@ -6,9 +6,10 @@ The Quiz app presented in this repository is built using the technologies taught
 
 ## Features  
 * => Informative "How To" page
+* => Responsive design for devices   
+* => Used Modern Javascript techniques  
 * => A navigation bar built using Bootstrap   
 * => Custom font view with Google font family
-* => Responsive design for devices    
 * => 3 levels of difficulty and level indicator
 * => Question cards with Bootstrap grid structure  
 * => Indicator structure showing which question you are in
