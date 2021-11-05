@@ -7,7 +7,9 @@ The Quiz app presented in this repository is built using the technologies taught
 ## Features  
 * => Informative "How To" page
 * => Responsive design for devices   
-* => Used Modern Javascript techniques  
+* => Used Modern Javascript techniques 
+* => Asynchronous programming with Restful API & AJAX  
+* => Loading animation 
 * => A navigation bar built using Bootstrap   
 * => Custom font view with Google font family
 * => 3 levels of difficulty and level indicator
@@ -70,6 +72,8 @@ The Quiz app presented in this repository is built using the technologies taught
 
 * Do option buttons show one after the other when a category is clicked?
 
+* Is the loading animation loaded before the data arrives and is it removed after the data arrives?
+
 * Is the Question navigation working correctly, showing which question of the quiz you are in?
 
 * When a choice is made from the question's options, does it match the correct answer?
@@ -92,6 +96,8 @@ The Quiz app presented in this repository is built using the technologies taught
 * Does the previous and next button bring up the previous and next question?
 
 * Is the score information displayed correctly on the leaderboard?
+
+* Is the leaderboard removed when selecting a level after the leaderboard appears?
 
 * When the start button is clicked, are the same test questions and options brought by changing their places?
 
@@ -117,6 +123,7 @@ This website design was produced with the Visual Studio Code IDE. Git was used a
 * Buttons [https://getbootstrap.com/docs/4.0/components/buttons/](https://getbootstrap.com/docs/4.0/components/buttons/)
 * Cards [https://getbootstrap.com/docs/4.0/components/card/](https://getbootstrap.com/docs/4.0/components/card/)
 * API - Open Trivia DB [https://opentdb.com/api_config.php](https://opentdb.com/api_config.php)
+* LOADING.IO [https://loading.io/](https://loading.io/)
 * Stack Overflow [https://stackoverflow.com/](https://stackoverflow.com/)
 * Free Code Camp [https://www.freecodecamp.org/](https://www.freecodecamp.org/)
 * W3 Schools [https://www.w3schools.com/](https://www.w3schools.com/)
