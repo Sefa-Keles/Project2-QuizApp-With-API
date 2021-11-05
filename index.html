@@ -7,9 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Mini</title>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <!--External CSS File-->
     <link rel="stylesheet" href="style.css">
@@ -19,51 +17,55 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap" rel="stylesheet">
 </head>
 
-<!--NAVITATION BAR-->
-<div class="container my-3">
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item col-6">
-            <a class="nav-link active" id="howtoTab" data-toggle="tab" href="#howto" role="tab" aria-controls="quizPage"
-                aria-selected="true">How To</a>
-        </li>
-        <li id="dropdownList" class="nav-item dropdown col-6">
-            <a class="nav-link dropdown-toggle select-level" href="#" id="navbarDropdown" role="button"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">SELECT LEVEL</a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a id="easy" class="dropdown-item" href="#">Easy</a>
-                <a id="medium" class="dropdown-item" href="#">Medium</a>
-                <a id="hard" class="dropdown-item" href="#">Hard</a>
-            </div>
-        </li>
-        <li class="nav-item col-sm-6 col-md-4 col-lg-2">
-            <a class="nav-link anchor" id="category=18" data-toggle="tab" href="#quizPage" role="tab"
-                aria-controls="quizPage" aria-selected="true">Computer Science</a>
-        </li>
-        <li class="nav-item col-sm-6 col-md-4 col-lg-2">
-            <a class="nav-link anchor" id="category=17" data-toggle="tab" href="#quizPage" role="tab"
-                aria-controls="quizPage" aria-selected="true">Science & Nature</a>
-        </li>
-        <li class="nav-item col-sm-6 col-md-4 col-lg-2">
-            <a class="nav-link anchor" id="category=12" data-toggle="tab" href="#quizPage" role="tab"
-                aria-controls="quizPage" aria-selected="true">Music</a>
-        </li>
-        <li class="nav-item col-sm-6 col-md-4 col-lg-2">
-            <a class="nav-link anchor" id="category=11" data-toggle="tab" href="#quizPage" role="tab"
-                aria-controls="quizPage" aria-selected="true">Film</a>
-        </li>
-        <li class="nav-item col-sm-6 col-md-4 col-lg-2">
-            <a class="nav-link anchor" id="category=10" data-toggle="tab" href="#quizPage" role="tab"
-                aria-controls="quizPage" aria-selected="true">Book</a>
-        </li>
-        <li class="nav-item col-sm-6 col-md-4 col-lg-2">
-            <a class="nav-link anchor" id="category=21" data-toggle="tab" href="#quizPage" role="tab"
-                aria-controls="quizPage" aria-selected="true">Sports</a>
-        </li>
-    </ul>
-</div>
+
 
 <body>
-    <div class="page-container">
+    <!--NAVIGATION BAR-->
+    <nav class="menu-bar">
+        <div class="container my-3">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item col-6">
+                    <a class="nav-link active" id="howtoTab" data-toggle="tab" href="#howto" role="tab"
+                        aria-controls="quizPage" aria-selected="true">How To</a>
+                </li>
+                <li id="dropdownList" class="nav-item dropdown col-6">
+                    <a class="nav-link dropdown-toggle select-level" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">SELECT LEVEL</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a id="easy" class="dropdown-item" href="#">Easy</a>
+                        <a id="medium" class="dropdown-item" href="#">Medium</a>
+                        <a id="hard" class="dropdown-item" href="#">Hard</a>
+                    </div>
+                </li>
+                <li class="nav-item col-sm-6 col-md-4 col-lg-2">
+                    <a class="nav-link anchor" id="category=18" data-toggle="tab" href="#quizPage" role="tab"
+                        aria-controls="quizPage" aria-selected="true">Computer Science</a>
+                </li>
+                <li class="nav-item col-sm-6 col-md-4 col-lg-2">
+                    <a class="nav-link anchor" id="category=17" data-toggle="tab" href="#quizPage" role="tab"
+                        aria-controls="quizPage" aria-selected="true">Science & Nature</a>
+                </li>
+                <li class="nav-item col-sm-6 col-md-4 col-lg-2">
+                    <a class="nav-link anchor" id="category=12" data-toggle="tab" href="#quizPage" role="tab"
+                        aria-controls="quizPage" aria-selected="true">Music</a>
+                </li>
+                <li class="nav-item col-sm-6 col-md-4 col-lg-2">
+                    <a class="nav-link anchor" id="category=11" data-toggle="tab" href="#quizPage" role="tab"
+                        aria-controls="quizPage" aria-selected="true">Film</a>
+                </li>
+                <li class="nav-item col-sm-6 col-md-4 col-lg-2">
+                    <a class="nav-link anchor" id="category=10" data-toggle="tab" href="#quizPage" role="tab"
+                        aria-controls="quizPage" aria-selected="true">Book</a>
+                </li>
+                <li class="nav-item col-sm-6 col-md-4 col-lg-2">
+                    <a class="nav-link anchor" id="category=21" data-toggle="tab" href="#quizPage" role="tab"
+                        aria-controls="quizPage" aria-selected="true">Sports</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!--MAIN PAGE CONTENT-->
+    <main class="main-content">
         <div class="wrapper">
             <div class="tab-content" id="myTabContent">
                 <!--HOW TO PAGE-->
@@ -72,7 +74,8 @@
                         <div class="jumbotron jumbotron-fluid">
                             <div class="container">
                                 <h1 class="display-4">Try Yourself <br> Test Your Knowledge</h1>
-                                <p class="lead">You can have the chance to evaluate your knowledge in a short quiz from
+                                <p class="lead">You can have the chance to evaluate your knowledge in a short quiz
+                                    from
                                     computer
                                     science, science and nature, music, movies, books and sports.
                                 </p>
@@ -116,7 +119,8 @@
                                 <span class="badge badge-info badge-pill">Note</span>
                                 If you select a level and then a quiz category, you can switch to quizzes from other
                                 categories
-                                without selecting a level again. However, you cannot switch to other difficulty levels
+                                without selecting a level again. However, you cannot switch to other difficulty
+                                levels
                                 before
                                 your quiz is over.
                             </li>
@@ -131,7 +135,7 @@
                             <div class="col-12">
                                 <!--GIF ANIMATION-->
                                 <div class=" container loadingGif">
-                                    <img src="squares.gif" width="100px" height="100px">
+                                    <img src="static/squares.gif" width="100px" height="100px">
                                 </div>
                                 <!--QUESTION CARD-->
                                 <div class="card">
@@ -204,7 +208,10 @@
                 </div>
             </footer>
         </div>
-    </div>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="quiz.js"></script>
 </body>
 

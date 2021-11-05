@@ -3,7 +3,7 @@
     font-family: 'Open Sans', sans-serif;
 }
 
-.page-container {
+.main-content {
     position: relative;
     min-height: 100vh;      /*Viewport height*/
   }

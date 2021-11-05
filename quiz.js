@@ -8,6 +8,7 @@ class Question {
     }
     checkAnswer(selectedElement){
         let parent = selectedElement.parentNode;
+        let allButtons = parent.parentNode;
         if(this.correct_answer === selectedElement.innerText){
             $(parent).attr("class", "btn btn-success");
             $(parent).siblings().attr ("disabled", "disabled");
@@ -16,6 +17,15 @@ class Question {
             $(parent).attr("class", "btn btn-danger");
             $(parent).siblings().attr ("disabled", "disabled");
         }  
+        
+
+        //ILERI GERI ISLEMLERINDE BUTTONLARI PASIF BIRAKMAK ICIN DENEME
+        // let optionsArray = Array.from(allButtons.children);
+        // for(let i in optionsArray){
+        //     if(i % 2 === 0){
+        //         optionsArray[i].disabled = true;
+        //     }
+        // }  
     }
 }
 
@@ -162,7 +172,6 @@ dropdowns.forEach(items => {
                             pagingElements[0].style.display = "block";
                             pagingElements[0].disabled = false;
                             pagingElements[0].onclick = () => {
-                                $(pagingElements[2]).siblings().attr ("disabled", "disabled");
                                 quiz.questionIndex--;
                                 loadQuestion();
                             }
