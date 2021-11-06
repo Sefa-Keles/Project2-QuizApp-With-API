@@ -7,17 +7,26 @@ class Question {
         this.question = newQuestion.question;
     }
     checkAnswer(selectedElement){
+        //console.log(selectedElement);
         let parent = selectedElement.parentNode;
-        let allButtons = parent.parentNode;
+        //console.log(parent)
+        
         if(this.correct_answer === selectedElement.innerText){
-            $(parent).attr("class", "btn btn-success");
+            $(parent).attr("class", "btn btn-success"); //Correct answer
+            $(parent).css("pointer-events","none");
             $(parent).siblings().attr ("disabled", "disabled");
             return true;
         }else {
             $(parent).attr("class", "btn btn-danger");
+            $(parent).css("pointer-events","none");//Disable clickability of selected option
             $(parent).siblings().attr ("disabled", "disabled");
-        }  
-        
+        } 
+
+        // let allOptions = parent.parentNode;
+        // for(let i in allOptions){
+        //     $(allOptions[i]).css("disabled", "disabled");
+        // }
+
 
         //ILERI GERI ISLEMLERINDE BUTTONLARI PASIF BIRAKMAK ICIN DENEME
         // let optionsArray = Array.from(allButtons.children);
@@ -46,7 +55,9 @@ class Quiz {
     }
 
     guess(selectedElement){
+        //console.log(selectedElement)
         let myQuestion = this.getQuestion();
+        //console.log(myQuestion)
         if(myQuestion.checkAnswer(selectedElement)){
             this.score++;
         }
@@ -139,6 +150,7 @@ dropdowns.forEach(items => {
                         let previousButton = document.getElementById("btnPrevious");
                         document.getElementById("btnAgain").style.display= "none";
                         document.getElementById("buttons").style.visibility = "visible";
+                        //Function that checks that the quiz has ended
                         if(quiz.isFinish()) {
                             showScore(previousButton, nextButton);
                         }else {  
@@ -147,7 +159,12 @@ dropdowns.forEach(items => {
                             document.querySelector("#question").innerText = quizQuestion.question;//Questions are associated with template
                             for(let i in quizOptions){
                                 let optionElement = document.querySelector("#option"+i);
+                                let optionParent = optionElement.parentNode;
+                                //console.log(optionParent)
+                                //activating the clickability of the selected optionctivating the clickability of the selected option
+                                $(optionParent).css("pointer-events", "auto");
                                 let parentElements = optionElement.parentElement;
+                                //console.log(parentElements);
                                 optionElement.innerText = quizOptions[i]; ////Options are associated with template
                                 getSelection("btn"+i, optionElement); 
                                 pagingQuestion(previousButton, nextButton, parentElements);           
@@ -158,6 +175,7 @@ dropdowns.forEach(items => {
                 
                     //where buttons are captured and the clicked button is sent to
                     let getSelection = (...selectionElements) => {
+                        //console.log(selectionElements)
                         let button = document.getElementById(selectionElements[0]);
                         button.onclick = function(){ 
                             quiz.guess(selectionElements[1]);
@@ -166,6 +184,12 @@ dropdowns.forEach(items => {
                 
                     //Function that handles events when the forward and back buttons are clicked
                     let pagingQuestion = (...pagingElements) => {
+                        // let clickIndex = quiz.questionIndex;
+                        // let buttonElements = pagingElements[2];
+                        // let idButton = buttonElements.id;
+                        // let btn = document.querySelector(`#${idButton}`)
+                        // console.log(btn);
+                        //console.log(buttonElements.id)
                         pagingElements[2].setAttribute("class", "btn btn-outline-primary");
                         pagingElements[2].removeAttribute("disabled");
                         if(quiz.questionIndex !== 0){
@@ -173,6 +197,12 @@ dropdowns.forEach(items => {
                             pagingElements[0].disabled = false;
                             pagingElements[0].onclick = () => {
                                 quiz.questionIndex--;
+                                // console.log(clickIndex);
+                                // console.log(quiz.questionIndex);
+                                // if(clickIndex > quiz.questionIndex){
+                                //     $(btn).css("disabled", true)
+                                // }
+                                //console.log(quiz.questionIndex)
                                 loadQuestion();
                             }
                         } else{
@@ -180,7 +210,17 @@ dropdowns.forEach(items => {
                             pagingElements[0].disabled = true;
                             pagingElements[1].style.display ="block";
                             pagingElements[1].onclick = () => {
+                                //let clickIndex = quiz.questionIndex;
                                 quiz.questionIndex++;
+                                // if(clickIndex > quiz.questionIndex){
+                                //     $(pagingElements[2]).css("disabled", false);
+                                // }
+                                // let index = quiz.questionIndex;
+                                // if(index !==0){
+                                //     for(let i; i<index; i++){
+                                //         questions[i]
+                                //     }
+                                // }
                                 loadQuestion();
                             };
                         }

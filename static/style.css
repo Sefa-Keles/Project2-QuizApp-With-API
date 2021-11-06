@@ -1,0 +1,34 @@
+*{
+    /*Google Font CSS*/
+    font-family: 'Open Sans', sans-serif;
+}
+
+.main-content {
+  position: relative;
+  min-height: 100vh;      /*Viewport height*/
+}
+  
+.wrapper {
+  padding-bottom: 2.5rem;    /* Footer height */
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: auto;            /* Footer height */
+}
+
+.footer-container{
+  background-color: #FF5733;
+}
+
+.loadingGif {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -50px;
+  margin-left: -100px;
+}
+
+ 

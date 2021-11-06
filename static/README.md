@@ -6,7 +6,8 @@ The Quiz app presented in this repository is built using the technologies taught
 
 ## Features  
 * => Informative "How To" page
-* => Responsive design for devices   
+* => Responsive design for devices
+* => HTML structure created with semantic tags  
 * => Used Modern Javascript techniques 
 * => Asynchronous programming with Restful API & AJAX  
 * => Loading animation 
@@ -104,6 +105,8 @@ The Quiz app presented in this repository is built using the technologies taught
 * When the start again button is clicked, do the options of the questions are changed?
 
 * When the start again button is clicked, is the level set to the default value?
+
+* Does it increase the score when you click the same answer over and over after giving a correct answer?
 
 
 
