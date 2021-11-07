@@ -100,7 +100,15 @@ The Quiz app presented in this repository is built using the technologies taught
 
 * Is the leaderboard removed when selecting a level after the leaderboard appears?
 
-* When the start button is clicked, are the same test questions and options brought by changing their places?
+* When the start again button is clicked, are the same test questions and options brought by changing their places?
+
+* Is the next button disable before the questions are clicked?
+
+* When the previous button is clicked, are the options of the previous question disabled?
+* * When the previous button is clicked, does the next button become active?
+
+* Are the options active when going to a new quiz?
+* * Is the next button active when a guess is made after the options are active? 
 
 * When the start again button is clicked, do the options of the questions are changed?
 
