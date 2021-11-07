@@ -8,6 +8,7 @@ class Question {
     }
     checkAnswer(selectedElement){
         let parent = selectedElement.parentNode;
+        document.getElementById("btnNext").disabled = false;//Next button disabled
         if(this.correct_answer === selectedElement.innerText){
             $(parent).attr("class", "btn btn-success"); //Correct answer
             $(parent).css("pointer-events","none");
@@ -58,6 +59,7 @@ let anchors = document.querySelectorAll(".anchor");
 let loadingGif = document.querySelector(".loadingGif");
 let cardElement = document.querySelector(".card");
 let anchorsArray = Array.from(anchors);
+let disableButton = "";
 
 //Function that controls the visibility of categories
 let displayCategories = (text) =>{   
@@ -83,6 +85,7 @@ dropdowns.forEach(items => {
                 cardElement.style.display = "none";
                 dropdownList.disabled = true;
                 dropdownList.style.color = "grey";
+                disableButton = "true" //Buttons are enabled when the category is clicked.
                 let quizText = element.text; 
                 let quizTitle =`${quizText} - ${levels.toUpperCase()}` //Quiz info in card
                 $(".quiz-title").text(quizTitle);//Card header changes dynamically
@@ -100,7 +103,7 @@ dropdowns.forEach(items => {
                     let questionData = JSON.parse(this.responseText); //Converting JSON data to string
 
                     //Function that shuffles the order of options from url data
-                    let shuffle = (questionOptions) => {
+                    const shuffle = (questionOptions) => {
                         let currentIndex = questionOptions.length,  randomIndex;
                         while (currentIndex != 0) {
                             randomIndex = Math.floor(Math.random() * currentIndex);
@@ -123,7 +126,8 @@ dropdowns.forEach(items => {
                     //Creating new object
                     let quiz = new Quiz(questions);            
                     //Function to associate object with HTML
-                    let loadQuestion = () =>{
+                    
+                    const loadQuestion = () =>{
                         //Remove Gif and show card template
                         loadingGif.style.display = "none"; 
                         cardElement.style.display = "block";
@@ -131,7 +135,7 @@ dropdowns.forEach(items => {
                         let previousButton = document.getElementById("btnPrevious");
                         document.getElementById("btnAgain").style.display= "none";
                         document.getElementById("buttons").style.visibility = "visible";
-
+                        
                         //Function that checks that the quiz has ended
                         if(quiz.isFinish()) {
                             showScore(previousButton, nextButton);
@@ -142,7 +146,7 @@ dropdowns.forEach(items => {
                             for(let i in quizOptions){
                                 let optionElement = document.querySelector("#option"+i);
                                 let optionParent = optionElement.parentNode;
-
+                                
                                 //Activating the clickability of the selected optionctivating the clickability of the selected option
                                 $(optionParent).css("pointer-events", "auto");
                                 let parentElements = optionElement.parentElement;
@@ -150,12 +154,22 @@ dropdowns.forEach(items => {
                                 getSelection("btn"+i, optionElement); 
                                 pagingQuestion(previousButton, nextButton, parentElements);           
                             }
+                            //When the Previous button is clicked, it enables the options of the questions to be disabled.
+                            if(disableButton === "false"){
+                                document.getElementById("btnPrevious").disabled = true;
+                                let buttonSiblings = document.getElementById("buttons");
+                                let siblingsArray = Array.from(buttonSiblings.children);
+                                let buttonArray = siblingsArray.filter(item => item.id % 2 !== 0);
+                                buttonArray.forEach(element => element.disabled = true);
+                             }else{
+                                nextButton.disabled = true;
+                             }
                             showProgress();
                         }  
                     }
                 
                     //Where buttons are captured and the clicked button is sent to
-                    let getSelection = (...selectionElements) => {
+                    const getSelection = (...selectionElements) => {
                         let button = document.getElementById(selectionElements[0]);
                         button.onclick = function(){ 
                             quiz.guess(selectionElements[1]);
@@ -163,14 +177,16 @@ dropdowns.forEach(items => {
                     };
                 
                     //Function that handles events when the forward and back buttons are clicked
-                    let pagingQuestion = (...pagingElements) => {
+                    const pagingQuestion = (...pagingElements) => {
                         pagingElements[2].setAttribute("class", "btn btn-outline-primary");
                         pagingElements[2].removeAttribute("disabled");
                         if(quiz.questionIndex !== 0){
                             pagingElements[0].style.display = "block";
                             pagingElements[0].disabled = false;
-                            pagingElements[0].onclick = () => {
+                            pagingElements[0].onclick = () => { 
                                 quiz.questionIndex--;
+                                disableButton = "false";//Counter variable that controls pagination
+                                document.getElementById("btnNext").disabled = false ;
                                 loadQuestion();
                             }
                         } else{
@@ -179,12 +195,13 @@ dropdowns.forEach(items => {
                             pagingElements[1].style.display ="block";
                             pagingElements[1].onclick = () => {
                                 quiz.questionIndex++;
+                                disableButton = "true";//Counter variable that controls pagination
                                 loadQuestion();
                             };
                         }
                     }
                     //Function that calculates the total score at the end of the quiz and reloads the quiz
-                    let showScore = (...pagingButtons) => {
+                    const showScore = (...pagingButtons) => {
                         for(let i in pagingButtons){
                             pagingButtons[i].style.display = "none";
                         };
@@ -215,7 +232,7 @@ dropdowns.forEach(items => {
                     };
                 
                     //Question navigation information
-                    let showProgress = () => {
+                    const showProgress = () => {
                         let total = quiz.questions.length;
                         let questionNumber = quiz.questionIndex+1;
                         document.querySelector("#progress").innerText =  "Question "+ questionNumber + " of " + total;
