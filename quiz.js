@@ -116,32 +116,36 @@ dropdowns.forEach(items => {
                     // Loop used to manipulate the API according to the algorithm
                     let questions = [];
                     for(let i in questionData.results){
-                        let questionOptions = [...questionData.results[i].incorrect_answers, questionData.results[i].correct_answer];// The options in the URL were collected in one line according to my own algorithm.
+                        questionOptions = [...questionData.results[i].incorrect_answers, questionData.results[i].correct_answer];//The options in the URL were collected in one line according to my own algorithm.
                         let shuffleOptions = shuffle(questionOptions); // Shuffle option items
+                        //console.log(shuffleOptions)
                         let questionItem = questionData.results;
                         questionItem[i].allOptions = shuffleOptions;// Added a new object key to the API (allOptions)
                         questions.push(new Question(questionItem[i])); // New Question Created
                     }
 
                     //Creating new object
-                    let quiz = new Quiz(questions);            
-                    //Function to associate object with HTML
-                    
-                    const loadQuestion = () =>{
-                        //Remove Gif and show card template
-                        loadingGif.style.display = "none"; 
+                    let quiz = new Quiz(questions);      
+
+                    let startAgain = "false";//Control variable that changes the order of options when the Start Again button is clicked
+                    const loadQuestion = () =>{ //Function to associate object with HTML 
+                        
+                        loadingGif.style.display = "none"; //Remove Gif and show card template
                         cardElement.style.display = "block";
                         let nextButton = document.getElementById("btnNext");
                         let previousButton = document.getElementById("btnPrevious");
                         document.getElementById("btnAgain").style.display= "none";
                         document.getElementById("buttons").style.visibility = "visible";
-                        
+
                         //Function that checks that the quiz has ended
                         if(quiz.isFinish()) {
                             showScore(previousButton, nextButton);
                         }else {  
+                            let quizOptions = [];
                             let quizQuestion = quiz.getQuestion();
-                            let quizOptions = quizQuestion.allOptions;
+                            quizOptions = quizQuestion.allOptions;
+                            if(startAgain === "true") quizOptions = quizOptions.sort(()=> Math.random()-0.5); //Change order on Start Again button click
+                                
                             document.querySelector("#question").innerText = quizQuestion.question;//Questions are associated with template
                             for(let i in quizOptions){
                                 let optionElement = document.querySelector("#option"+i);
@@ -219,6 +223,7 @@ dropdowns.forEach(items => {
 
                         //Click event of the Start Again button
                         btnAgain.onclick = () => {
+                            startAgain = "true"//Control variable that changes the order of options when the Start Again button is clicked
                             quiz.score = 0;
                             btnAgain.style.display = "none";
                             dropdownList.disabled = true;
